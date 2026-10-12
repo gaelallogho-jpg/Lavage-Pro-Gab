@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F4C5C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lavage Pro">
+<title>Lavage Pro – Gabon (Port-Gentil & Libreville)</title>
+<link rel="manifest" id="pwa-manifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lagoon:#0F4C5C; --lagoon-2:#16697A; --sun:#F2B705; --sun-ink:#3A2C00;
+  --ink:#14232A; --muted:#5B6B70; --line:#D3DDDB; --foam:#F4F7F6; --card:#FFFFFF;
+  --red:#C23B22; --green:#1F7A4D; --chip:#E6EEEC;
+  --font:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --cond:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--foam);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.4;-webkit-tap-highlight-color:transparent}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px 110px}
+header.top{position:relative;background:#0F4C5C;color:#fff;margin:0 -14px;padding:10px 14px 12px}
+.top-row{display:flex;align-items:center;gap:10px}
+.top h1{font-family:var(--cond);font-weight:700;font-size:1.45rem;margin:0;line-height:1.05;flex:1;min-width:0;overflow-wrap:anywhere}
+.top .sub{font-size:.82rem;opacity:.85}
+.iconbtn{background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:10px;width:40px;height:40px;display:grid;place-items:center;font-size:1.15rem}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs[hidden]{display:none}
+nav.tabs .in{display:flex;max-width:560px;width:100%}
+nav.tabs button{flex:1;border:0;background:none;padding:8px 2px 9px;font-size:.72rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+nav.tabs button[aria-current="page"]{color:var(--lagoon);font-weight:700}
+nav.tabs button[aria-current="page"]::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--sun);border-radius:0 0 3px 3px}
+h2{font-family:var(--cond);font-weight:700;font-size:1.35rem;margin:18px 0 8px}
+h3{font-size:.95rem;margin:14px 0 6px;color:var(--muted);font-weight:600}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.panel+.panel{margin-top:10px}
+.grid{display:grid;gap:8px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.tile{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:10px 6px;text-align:center;min-height:62px}
+.tile b{display:block;font-family:var(--cond);font-size:1.2rem;font-weight:700;line-height:1.05}
+.tile small{color:var(--muted);font-size:.78rem}
+.tile[aria-pressed="true"]{border-color:var(--lagoon);background:var(--chip)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:8px 13px;font-size:.92rem;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--lagoon);border-color:var(--lagoon);color:#fff}
+label.f{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+input.in,select.in{width:100%;border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:11px 12px;font-size:1rem}
+.price-in{font-family:var(--cond);font-size:1.6rem !important;font-weight:700;padding:6px 12px !important}
+.btn{border:0;border-radius:12px;padding:13px 16px;font-weight:700;font-size:1rem;background:var(--chip);color:var(--ink)}
+.btn.main{background:var(--sun);color:var(--sun-ink);width:100%;font-size:1.1rem;padding:16px}
+.btn.lagoon{background:#0F4C5C;color:#fff}
+.btn.small{padding:8px 12px;font-size:.88rem;border-radius:10px;white-space:nowrap}
+.row{display:flex;align-items:center;gap:10px}
+.row .grow{flex:1;min-width:0}
+.list .item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.list .item:first-child{border-top:0}
+.muted{color:var(--muted)}
+.small{font-size:.84rem}
+.money{font-family:var(--cond);font-weight:700;font-size:1.15rem;white-space:nowrap}
+.pos{color:var(--green)}.neg{color:var(--red)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--chip)}
+.tag.app{background:#DDF2E6;color:#145A37;font-weight:700}
+input.plaque{text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px;display:block;width:100%;text-align:left;font:inherit;color:inherit}
+.scard h4{margin:0;font-family:var(--cond);font-size:1.3rem;font-weight:700}
+.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%) translateY(20px);background:#14232A;color:#fff;padding:11px 18px;border-radius:12px;font-weight:600;opacity:0;transition:.25s;z-index:20;pointer-events:none;max-width:90vw}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.pricing-card{border:2px solid var(--line);border-radius:12px;padding:12px;margin-top:10px;background:var(--card)}
+.split{display:flex;justify-content:space-between;gap:10px;padding:5px 0}
+.empty{text-align:center;padding:22px 10px;color:var(--muted)}
+table.tarifs{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:8px}
+table.tarifs th,table.tarifs td{padding:6px;border-bottom:1px solid var(--line);text-align:left}
+table.tarifs input{width:100%;border:1px solid var(--line);border-radius:6px;padding:6px;background:var(--card);font-family:var(--cond);font-size:1rem;font-weight:700}
+.alert-box{background:#FFF2C2;color:#5C4500;padding:12px;border-radius:10px;margin-bottom:10px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<nav class="tabs" id="tabs" hidden></nav>
+<div id="modal"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+
+var manifestData = {
+  "name": "Lavage Pro Gabon",
+  "short_name": "LavagePro",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F4F7F6",
+  "theme_color": "#0F4C5C",
+  "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F4C5C'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='%23F2B705'>💧</text></svg>", "sizes": "512x512", "type": "image/svg+xml"}]
+};
+var blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+$("#pwa-manifest").href = URL.createObjectURL(blob);
+
+if ('serviceWorker' in navigator) {
+  var swCode = "self.addEventListener('fetch', function(e) { e.respondWith(fetch(e.request).catch(function() { return caches.match(e.request); })); });";
+  var swBlob = new Blob([swCode], {type: 'text/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(function(){});
+}
+
+var KEY="lavagepro_gestion_v8";
+var S=null, view="laver", draft=null;
+var clientVille="Port-Gentil";
+var userRole="gerant";
+
+var QUARTIERS_POG = ["Balise", "Grand Village", "Chantier Socatrans", "Sogara", "Trois-Quartiers", "Matanda", "Plein-Ciel"];
+var QUARTIERS_LBV = ["Akébé", "Glass", "Batterie 4", "Oloumi", "PK8", "PK12", "Mindoubé", "Louis", "Charbonnage", "Nzeng-Ayong"];
+
+var CATS=[{id:"berline",l:"Berline"},{id:"4x4",l:"4x4"},{id:"pickup",l:"Pick-up"},{id:"taxi",l:"Taxi"},{id:"minibus",l:"Minibus"},{id:"moto",l:"Moto"},{id:"camion",l:"Camion"}];
+var FORMS=[{id:"ext",l:"Extérieur"},{id:"complet",l:"Complet"},{id:"int",l:"Intérieur"},{id:"moteur",l:"Moteur"}];
+var DEFAULT_TARIFS={
+ berline:{ext:2000,complet:3000,int:1500,moteur:2000},
+ "4x4":{ext:3000,complet:5000,int:2500,moteur:3000},
+ pickup:{ext:3500,complet:5000,int:2500,moteur:3000},
+ taxi:{ext:1500,complet:2500,int:1000,moteur:1500},
+ minibus:{ext:4000,complet:6000,int:3000,moteur:3500},
+ moto:{ext:1000,complet:1500,int:0,moteur:1000},
+ camion:{ext:6000,complet:10000,int:0,moteur:5000}};
+
+function $(s){return document.querySelector(s)}
+function esc(t){return String(t==null?"":t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function F(n){n=Math.round(n||0);return n.toLocaleString("fr-FR").replace(/\u202f|\u00a0/g," ")+" F"}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function dkey(d){d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function today(){return dkey()}
+function catL(id){var c=CATS.find(function(x){return x.id===id});return c?c.l:id}
+function formL(id){var c=FORMS.find(function(x){return x.id===id});return c?c.l:id}
+function toast(t){var e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){e.classList.remove("on")},2200)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function load(){try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):null}catch(e){return null}}
+
+function isSubActive(){
+  if(!S || !S.cfg || !S.cfg.sub) return false;
+  return Date.now() < S.cfg.sub.expires;
+}
+
+function clientMode(){return location.hash==="#client"}
+var mode="accueil";
+
+function render(){
+  var app=$("#app"),tabs=$("#tabs");
+  if(clientMode()){tabs.hidden=true;app.innerHTML=vClient();return}
+  if(mode==="inscription"||(mode==="gestion"&&!S)){tabs.hidden=true;app.innerHTML=onboarding();return}
+  if(mode!=="gestion"){tabs.hidden=true;app.innerHTML=vAccueil();return}
+  
+  tabs.hidden=false;
+  var vs = userRole==="gerant" ? [["laver","Laver"],["file","File"],["laveurs","Équipe"],["reglages","Réglages"]] : [["patron","Bilan Patron"],["reglages","Réglages"]];
+  
+  tabs.innerHTML='<div class="in">'+vs.map(function(v){return '<button data-act="tab" data-v="'+v[0]+'" '+(view===v[0]?'aria-current="page"':"")+'>'+v[1]+'</button>'}).join("")+'</div>';
+  
+  var active = isSubActive();
+  var roleBadge = userRole==="gerant" ? '🟢 Gérant' : '👔 Patron';
+  var subBadge = active ? '<span style="color:#6EE7A8">● Essai/Abonné</span>' : '<span style="color:#F2B705">● Expiré</span>';
+  
+  var head='<header class="top"><div class="top-row"><div class="grow" style="flex:1;min-width:0"><h1>'+esc(S.cfg.nom||"Mon lavage")+'</h1><div class="sub">'+esc(S.cfg.quartier+", "+S.cfg.ville)+' · '+roleBadge+' | '+subBadge+'</div></div>'+
+   '<button class="iconbtn" style="width:auto;padding:0 8px;font-size:.75rem;font-weight:600" data-act="switchrole">'+(userRole==="gerant"?"Patron":"Gérant")+'</button>'+
+   '<button class="iconbtn" style="width:auto;padding:0 8px;font-size:.75rem;font-weight:600" data-act="accueil">Quitter</button></div></header>';
+  
+  var body;
+  if(!active && view!=="reglages" && view!=="patron"){
+    body = '<h2>Période d\'essai expirée</h2><div class="alert-box">Votre mois d\'essai gratuit est arrivé à échéance. Veuillez choisir un abonnement pour continuer à enregistrer des lavages.</div>' + vAbonnementBox();
+  } else {
+    body={laver:vLaver,file:vFile,laveurs:vLaveurs,patron:vPatron,reglages:vReglages}[view]();
+  }
+  app.innerHTML=head+body;
+}
+
+function onboarding(){
+  var o=onboarding.st||(onboarding.st={nom:"",ville:"Port-Gentil",quartier:"Balise",tel:"",tarifs:JSON.parse(JSON.stringify(DEFAULT_TARIFS)),laveurNom:"Junior"});
+  var qList = o.ville==="Port-Gentil" ? QUARTIERS_POG : QUARTIERS_LBV;
+  return '<div class="onb" style="padding:18px 0"><div class="hero" style="background:#0F4C5C;color:#fff;margin:0 -14px;padding:28px 18px 22px"><h1>Bienvenue sur Lavage Pro</h1><p>Profitez de 1 mois d\'essai gratuit offert à Port-Gentil & Libreville.</p></div>'+
+  '<h2>1. Infos du lavage</h2><div class="panel">'+
+  '<label class="f">Nom du lavage</label><input class="in" data-o="nom" value="'+esc(o.nom)+'" placeholder="Ex. Lavage Pro Center">'+
+  '<div class="grid g2"><div><label class="f">Ville</label><select class="in" id="o-ville" data-o="ville"><option'+(o.ville==="Port-Gentil"?" selected":"")+'>Port-Gentil</option><option'+(o.ville==="Libreville"?" selected":"")+'>Libreville</option></select></div>'+
+  '<div><label class="f">Quartier</label><select class="in" data-o="quartier">'+qList.map(function(q){return '<option'+(o.quartier===q?" selected":"")+'>'+q+'</option>'}).join("")+'</select></div></div>'+
+  '<label class="f">Téléphone WhatsApp</label><input class="in" type="tel" data-o="tel" value="'+esc(o.tel)+'" placeholder="077 00 00 00">'+
+  '</div>'+
+  '<h2>2. Vos Grilles Tarifaires (F CFA)</h2><div class="panel" style="overflow-x:auto">'+
+  '<table class="tarifs"><tr><th>Catégorie</th><th>Ext.</th><th>Complet</th><th>Int.</th><th>Moteur</th></tr>'+
+  CATS.map(function(c){return '<tr><td><b>'+c.l+'</b></td>'+FORMS.map(function(f){return '<td><input type="number" data-tcat="'+c.id+'" data-tform="'+f.id+'" value="'+o.tarifs[c.id][f.id]+'"></td>'}).join("")+'</tr>'}).join("")+
+  '</table></div>'+
+  '<h2>3. Premier Laveur</h2><div class="panel">'+
+  '<label class="f">Nom du premier laveur</label><input class="in" data-o="laveurNom" value="'+esc(o.laveurNom)+'">'+
+  '</div>'+
+  '<button class="btn main" style="margin-top:14px" data-act="ostart">Activer mon mois d\'essai gratuit</button></div>';
+}
+
+function vLaver(){
+  var d=draft||(draft={cat:"berline",formule:"ext",prix:S.cfg.tarifs.berline.ext,plaque:"",laveur:S.laveurs[0]?S.laveurs[0].id:"",fromApp:false});
+  return '<h2>Enregistrer un lavage</h2>'+
+         '<div class="grid g3">'+CATS.map(function(c){return '<button class="tile" data-act="dcat" data-v="'+c.id+'" aria-pressed="'+(d.cat===c.id)+'"><b>'+c.l+'</b><small>'+F(S.cfg.tarifs[c.id][d.formule]||0)+'</small></button>'}).join("")+'</div>'+
+         '<h3>Formule</h3><div class="chips">'+FORMS.map(function(f){return '<button class="chip" data-act="dform" data-v="'+f.id+'" aria-pressed="'+(d.formule===f.id)+'">'+f.l+'</button>'}).join("")+'</div>'+
+         '<h3>Prix (Modifiable)</h3><input class="in price-in" type="number" data-d="prix" value="'+d.prix+'">'+
+         '<h3>Laveur assigné</h3><div class="chips">'+S.laveurs.map(function(l){return '<button class="chip" data-act="dlav" data-v="'+l.id+'" aria-pressed="'+(d.laveur===l.id)+'">'+esc(l.nom)+'</button>'}).join("")+'</div>'+
+         '<label class="f">Immatriculation</label><input class="in plaque" data-d="plaque" value="'+esc(d.plaque)+'" placeholder="GA-123-AA">'+
+         '<label class="row" style="margin-top:12px"><input type="checkbox" data-d="fromApp" '+(d.fromApp?'checked':'')+'><span>Client issu de l\'application (−5%)</span></label>'+
+         '<button class="btn main" style="margin-top:14px" data-act="dsave">Valider le lavage</button>';
+}
+
+function vFile(){
+  var L=S.lavages.filter(function(l){return l.day===today()});
+  var totalJour=L.reduce(function(acc,x){return acc+x.prix},0);
+  return '<h2>File du jour ('+L.length+' véhicules)</h2>'+
+         '<div class="panel" style="margin-bottom:10px"><div class="split"><span>Recette totale du jour</span><b class="money">'+F(totalJour)+'</b></div></div>'+
+         '<div class="panel list">'+(L.length?L.map(function(l){
+           var lavObj=S.laveurs.find(function(x){return x.id===l.laveur});
+           return '<div class="item"><div class="grow"><b>'+catL(l.cat)+'</b> ('+formL(l.formule)+') <span class="muted">'+esc(l.plaque)+'</span><div class="small muted">Laveur : '+(lavObj?esc(lavObj.nom):"Inconnu")+' '+(l.fromApp?'<tag class="tag app">Plateforme</tag>':'')+'</div></div><div class="money">'+F(l.prix)+'</div></div>'}).join(""):'<div class="empty">Aucun véhicule enregistré aujourd\'hui.</div>')+'</div>';
+}
+
+function vLaveurs(){
+  return '<h2>Gestion de l\'équipe</h2>'+
+         '<div class="panel">'+S.laveurs.map(function(l){return '<div class="split"><b>'+esc(l.nom)+'</b><button class="btn small danger" data-act="dellav" data-v="'+l.id+'">Supprimer</button></div>'}).join("")+'</div>'+
+         '<div class="panel" style="margin-top:10px"><label class="f">Nouveau Laveur</label><input class="in" id="new-laveur-nom" placeholder="Prénom"><button class="btn lagoon" style="width:100%;margin-top:8px" data-act="addlav">Ajouter à l\'équipe</button></div>';
+}
+
+function vPatron(){
+  var allL=S.lavages;
+  var totalGlobal=allL.reduce(function(a,b){return a+b.prix},0);
+  var expDate = new Date(S.cfg.sub.expires).toLocaleDateString("fr-FR");
+  return '<h2>Tableau de Bord Patron</h2>'+
+         '<div class="panel"><div class="split"><span>Statut Abonnement</span><b class="pos">'+(isSubActive()?"Essai / Actif":"Expiré")+'</b></div>'+
+         '<div class="split"><span>Fin de validité</span><b>'+expDate+'</b></div>'+
+         '<div class="split"><span>Chiffre d\'affaires global</span><b class="money">'+F(totalGlobal)+'</b></div></div>'+
+         '<h2>Renouveler mon abonnement</h2>'+vAbonnementBox();
+}
+
+function vReglages(){
+  return '<h2>Réglages & Tarifs</h2>'+
+         '<div class="panel"><label class="f">Nom du lavage</label><input class="in" data-rc="nom" value="'+esc(S.cfg.nom)+'">'+
+         '<label class="f">Téléphone</label><input class="in" data-rc="tel" value="'+esc(S.cfg.tel||"")+'"></div>'+
+         '<h2>Grille de Tarifs</h2><div class="panel" style="overflow-x:auto">'+
+         '<table class="tarifs"><tr><th>Catégorie</th><th>Ext.</th><th>Complet</th><th>Int.</th><th>Moteur</th></tr>'+
+         CATS.map(function(c){return '<tr><td><b>'+c.l+'</b></td>'+FORMS.map(function(f){return '<td><input type="number" data-rcat="'+c.id+'" data-rform="'+f.id+'" value="'+S.cfg.tarifs[c.id][f.id]+'"></td>'}).join("")+'</tr>'}).join("")+
+         '</table></div>'+
+         '<h2>Abonnement</h2>'+vAbonnementBox();
+}
+
+function vAbonnementBox(){
+  return '<div class="pricing-card"><h4>Starter (5 000 F / mois)</h4><div class="small muted">Trimestriel: 14 250 F | Annuel: 51 000 F (-15%)</div><button class="btn small lagoon" style="margin-top:8px" data-act="sub" data-days="30">Choisir (Airtel/Moov)</button></div>'+
+         '<div class="pricing-card" style="border-color:var(--lagoon);background:var(--chip)"><h4>Pro (12 500 F / mois)</h4><div class="small muted">Trimestriel: 35 625 F | Annuel: 127 500 F (-15%)</div><button class="btn small lagoon" style="margin-top:8px" data-act="sub" data-days="30">Choisir (Airtel/Moov)</button></div>'+
+         '<div class="pricing-card"><h4>Business (20 000 F / mois)</h4><div class="small muted">Trimestriel: 57 000 F | Annuel: 204 000 F (-15%)</div><button class="btn small lagoon" style="margin-top:8px" data-act="sub" data-days="30">Choisir (Airtel/Moov)</button></div>';
+}
+
+function vClient(){
+  var villes=["Port-Gentil","Libreville"],v=clientVille;
+  var qList = v==="Port-Gentil" ? QUARTIERS_POG : QUARTIERS_LBV;
+  var html='<header class="top"><div class="top-row"><div style="flex:1;min-width:0"><h1>Trouver un lavage</h1><div class="sub">Port-Gentil & Libreville</div></div>'+'<button class="iconbtn" style="width:auto;padding:0 12px;font-size:.85rem;font-weight:600" data-act="cback">Accueil</button></div></header>';
+  html+='<div class="chips" style="margin:14px 0 4px">'+villes.map(function(x){return '<button class="chip" data-act="cville" data-v="'+x+'" aria-pressed="'+(x===v)+'">'+x+'</button>'}).join("")+'</div>';
+  html+='<h2>Centres disponibles à '+v+'</h2>';
+  var dummyStations = [
+    {id:"st-1",nom:v==="Port-Gentil"?"Laval Express Balise":"Laval Central Akébé",quartier:qList[0],ville:v},
+    {id:"st-2",nom:v==="Port-Gentil"?"Station Pro Sogara":"Lavage Prestige Glass",quartier:qList[1]||qList[0],ville:v}
+  ];
+  dummyStations.forEach(function(s){
+    var mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s.nom + " " + s.quartier + " " + s.ville + " Gabon");
+    html+='<div class="scard"><h4>'+esc(s.nom)+'</h4><div class="small muted">Quartier : '+esc(s.quartier)+'</div>'+
+          '<div style="margin-top:10px;display:flex;gap:8px">'+
+          '<a class="btn small lagoon" style="text-decoration:none;text-align:center;flex:1" target="_blank" rel="noopener" href="'+mapsUrl+'">🧭 S\'y rendre (Google Maps)</a>'+
+          '<button class="btn small" style="background:var(--sun);color:var(--sun-ink)" data-act="book">Annoncer ma venue</button>'+
+          '</div></div>';
+  });
+  return html;
+}
+
+function fresh(cfg){
+  // Offre 30 jours d'essai gratuit par défaut (30 * 86400 * 1000 ms)
+  cfg.sub = { plan: "essai", expires: Date.now() + (30 * 86400 * 1000) };
+  return {cfg:cfg,laveurs:[],lavages:[]};
+}
+
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]");if(!b)return;var a=b.dataset.act,v=b.dataset.v;
+  if(a==="tab"){view=v;render();window.scrollTo(0,0);return}
+  if(a==="switchrole"){userRole=userRole==="gerant"?"patron":"gerant";view=userRole==="gerant"?"laver":"patron";render();return}
+  if(a==="ostart"){
+    var o=onboarding.st;if(!o.nom.trim()){toast("Indiquez le nom du lavage");return}
+    S=fresh({nom:o.nom.trim(),ville:o.ville,quartier:o.quartier,tel:o.tel,tarifs:o.tarifs});
+    if(o.laveurNom.trim()) S.laveurs.push({id:uid(),nom:o.laveurNom.trim()});
+    save();mode="gestion";view="laver";userRole="gerant";render();toast("1 mois d'essai activé avec succès !");return;
+  }
+  if(a==="client"){location.hash="client";render();return}
+  if(a==="cback"){history.replaceState(null,"",location.pathname);render();window.scrollTo(0,0);return}
+  if(a==="cville"){clientVille=v;render();return}
+  if(a==="book"){toast("Venue enregistrée !");return}
+  if(a==="sub"){
+    // Simulation d'activation d'abonnement (à valider par Mobile Money sur le terrain)
+    S.cfg.sub.expires = Date.now() + (30 * 86400 * 1000);
+    save();render();toast("Abonnement activé pour 30 jours !");return;
+  }
+  if(a==="addlav"){
+    var inp=$("#new-laveur-nom");if(inp && inp.value.trim()){S.laveurs.push({id:uid(),nom:inp.value.trim()});save();render();toast("Laveur ajouté");}
+    return;
+  }
+  if(a==="dellav"){
+    S.laveurs=S.laveurs.filter(function(x){return x.id!==v});save();render();toast("Laveur supprimé");return;
+  }
+  if(!S)return;
+  if(a==="dcat"){
+    draft.cat=v;
+    draft.prix=S.cfg.tarifs[v][draft.formule]||0;
+    render();return;
+  }
+  if(a==="dform"){
+    draft.formule=v;
+    draft.prix=S.cfg.tarifs[draft.cat][v]||0;
+    render();return;
+  }
+  if(a==="dlav"){draft.laveur=v;render();return}
+  if(a==="dsave"){
+    if(!isSubActive()){toast("Abonnement requis. Veuillez renouveler.");view="reglages";render();return;}
+    if(!draft.plaque.trim()){toast("Indiquez l'immatriculation");return}
+    S.lavages.push({id:uid(),ts:Date.now(),day:today(),cat:draft.cat,formule:draft.formule,prix:+draft.prix,laveur:draft.laveur,plaque:draft.plaque.trim().toUpperCase(),fromApp:draft.fromApp});
+    save();
+    draft={cat:"berline",formule:"ext",prix:S.cfg.tarifs.berline.ext,plaque:"",laveur:S.laveurs[0]?S.laveurs[0].id:"",fromApp:false};
+    view="file";render();toast("Lavage enregistré !");return;
+  }
+});
+
+document.addEventListener("input",function(e){
+  var t=e.target;
+  if(onboarding.st && t.dataset.o!==undefined){
+    onboarding.st[t.dataset.o]=t.value;
+    if(t.dataset.o==="ville"){
+      onboarding.st.quartier = t.value==="Port-Gentil" ? QUARTIERS_POG[0] : QUARTIERS_LBV[0];
+    }
+  }
+  if(onboarding.st && t.dataset.tcat){
+    onboarding.st.tarifs[t.dataset.tcat][t.dataset.tform]=+t.value||0;
+  }
+  if(S && t.dataset.rcat){
+    S.cfg.tarifs[t.dataset.rcat][t.dataset.rform]=+t.value||0;save();
+  }
+  if(S && t.dataset.rc!==undefined){
+    S.cfg[t.dataset.rc]=t.value;save();
+  }
+  if(draft){
+    if(t.dataset.d==="prix")draft.prix=+t.value||0;
+    if(t.dataset.d==="plaque")draft.plaque=t.value;
+    if(t.dataset.d==="fromApp")draft.fromApp=t.checked;
+  }
+});
+
+S=load();
+if(!S){mode="inscription";render()}else{mode="gestion";render()}
+window.addEventListener("hashchange",function(){render();window.scrollTo(0,0)});
+})();
+</script>
+</body>
+</html>
